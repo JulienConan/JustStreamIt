@@ -1,6 +1,6 @@
-var genre_films = ['Animation', 'Horror', 'Film-Noir', ];
+var genre_films = ['best_films', 'Animation', 'Horror', 'Film-Noir', ];
 var number_films = 7;
-
+var url_api = 'http://127.0.0.1:8000/api/v1/titles/?genre='
 function createAllCarrousel(){
 	for (var category of genre_films){
 		carrouselCategory(category);
@@ -18,24 +18,29 @@ function searchBestFilm(genre,page=1,film_add=0, list_films=[]){
 	var page = page;
 	var film_add = film_add;
 	var balise = document.getElementById(genre);
-	fetch('http://127.0.0.1:8000/api/v1/titles/?genre=' + genre + '&sort_by=-imdb_score&page=' + page.toString())
-			.then(response => response.json())
-			.then(films_list => {
-				for (var i = 0; i < films_list.results.length; i++){
-					if (film_add < number_films) {
-						list_films.push(films_list.results[i.toString()]);
-						addImgFilm(balise, films_list.results[i.toString()]);
-						film_add += 1;
-					}
+	if (genre == 'best_films'){
+		var url = 'http://127.0.0.1:8000/api/v1/titles/?genre=';
+	} else {
+		var url = 'http://127.0.0.1:8000/api/v1/titles/?genre=' + genre;
+	}
+	fetch(url + '&sort_by=-imdb_score&page=' + page.toString())
+		.then(response => response.json())
+		.then(films_list => {
+			for (var i = 0; i < films_list.results.length; i++){
+				if (film_add < number_films) {
+					list_films.push(films_list.results[i.toString()]);
+					addImgFilm(balise, films_list.results[i.toString()]);
+					film_add += 1;
 				}
-				page += 1;
-				if (film_add < number_films){
-					searchBestFilm(genre, page, film_add, list_films);
-				}
-				if (film_add == number_films){
-					addFlecheDroite(balise);
-				}
-			})
+			}
+			page += 1;
+			if (film_add < number_films){
+				searchBestFilm(genre, page, film_add, list_films);
+			}
+			if (film_add == number_films){
+				addFlecheDroite(balise);
+			}
+		})
 	return list_films;
 
 }
@@ -48,10 +53,14 @@ function addFlecheDroite(balise) {
 }
 
 function addImgFilm(balise, film) {
-	balise.innerHTML += '<img class="img_film" src="' + film.image_url + '" onclick="modaleWindows(' + film.url.toString() + '">';
+	balise.innerHTML += '<img class="img_film" src="' + film.image_url + '" onclick="modaleWindows(' + film.url.toString() + ')">';
 }
 
 
-function modaleWindow(url) {
-
-}
+/*function modaleWindow(url) {
+	fetch(url)
+	.then(response => response.json())
+	.then(data =>{
+		console.log(data);
+	})
+}*/
