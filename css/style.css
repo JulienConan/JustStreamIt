@@ -1,0 +1,44 @@
+body{
+	margin: 0px;
+	background-color: black;
+}
+nav{
+	background-color: red;
+	height: 80px;;
+}
+form{
+	background-color: blue;
+}
+
+#carousel{
+	height: 200px;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+}
+#Logo{
+	margin: 0px;
+	height: 80px;
+}
+
+#title_cat {
+	text-align: center;
+	flex: auto;
+	color: white;
+}
+
+
+.fleche{
+	flex: auto;
+	vertical-align: middle;
+}
+.img_film{
+	flex: auto;
+	vertical-align: middle;
+	margin: 5px;
+}
+
+.category{
+	display: flex;
+	flex-direction: column;
+}
