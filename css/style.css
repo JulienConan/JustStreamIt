@@ -10,11 +10,12 @@ form{
 	background-color: blue;
 }
 
-#carousel{
+.carousel{
 	height: 200px;
 	display: flex;
 	align-content: center;
 	justify-content: center;
+
 }
 #Logo{
 	margin: 0px;
