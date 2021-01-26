@@ -22,12 +22,15 @@ form{
 	height: 80px;
 }
 
-#title_cat {
+h2 {
 	text-align: center;
 	flex: auto;
 	color: white;
 }
 
+h1 {
+	color: white;
+}
 
 .fleche{
 	flex: auto;
@@ -40,6 +43,11 @@ form{
 }
 
 .category{
+	margin: 0 auto;
+	width: 1400px;
+}
+.main_best_film {
 	display: flex;
-	flex-direction: column;
+	background-color: yellow;
+	margin: 50px;
 }
