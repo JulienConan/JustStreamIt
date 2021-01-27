@@ -1,25 +1,28 @@
+html {
+	font-size: 100%;
+}
+
 body{
 	margin: 0px;
 	background-color: black;
 }
 nav{
 	background-color: red;
-	height: 80px;;
+	height: 3rem;
 }
 form{
 	background-color: blue;
 }
 
 .carousel{
-	height: 200px;
+	height: 250px;
 	display: flex;
 	align-content: center;
 	justify-content: center;
 
 }
 #Logo{
-	margin: 0px;
-	height: 80px;
+	height  : 100%;
 }
 
 h2 {
@@ -33,21 +36,33 @@ h1 {
 }
 
 .fleche{
-	flex: auto;
+
 	vertical-align: middle;
+	height: 80%;
 }
 .img_film{
-	flex: auto;
-	vertical-align: middle;
-	margin: 5px;
+	margin: 1rem;
+	height: 80%;
+	display: none;
+}
+.img_film:hover {
+	vertical-align: bottom;
 }
 
 .category{
 	margin: 0 auto;
-	width: 1400px;
+	width: 50rem;
 }
-.main_best_film {
+#main_best_film {
 	display: flex;
 	background-color: yellow;
 	margin: 50px;
+	border: width style color;
+	border-width: 5px;
+	border-style: groove;
+	width: 50rem;
+}
+
+.img_film:hover {
+	opacity: 100;
 }

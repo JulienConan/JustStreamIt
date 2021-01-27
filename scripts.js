@@ -32,7 +32,7 @@ function searchBestFilm(genre,page=1,film_add=0, list_films=[]){
 			for (var i = 0; i < films_list.results.length; i++){
 				if (film_add < number_films) {
 					list_films.push(films_list.results[i.toString()]);
-					addImgFilm(balise, films_list.results[i.toString()]);
+					addImgFilm(balise, films_list.results[i.toString()], film_add, genre);
 					film_add += 1;
 				}
 			}
@@ -42,6 +42,7 @@ function searchBestFilm(genre,page=1,film_add=0, list_films=[]){
 			}
 			if (film_add == number_films){
 				addFlecheDroite(balise);
+				initVisibility(genre);
 			}
 		})
 		.catch(error => {
@@ -56,7 +57,7 @@ function bestFilm() {
 		.then(response => response.json())
 		.then(films_list => {
 			var best_film = films_list.results["0"];
-			addImgFilm(balise, best_film);
+			addImgFilm(balise, best_film, 0, 'best_film');
 			titleAndPlayBestFilm(best_film);
 		})
 		.catch(error => {
@@ -77,8 +78,12 @@ function addFlecheDroite(balise) {
 	balise.innerHTML += '<img class="fleche" src=img/fleche_droite.png onclick="">';
 }
 
-function addImgFilm(balise, film) {
-	balise.innerHTML += '<img class="img_film" src="' + film.image_url + '" onclick="modaleWindows(' + film.url.toString() + ')">';
+function addImgFilm(balise, film, number, genre) {
+	if (genre == 'best_film') {
+		balise.innerHTML += '<img class="img_film" id="' +genre + '" src="' + film.image_url + '" onclick="modaleWindows(' + film.url.toString() + ')"  style="display: block;">';
+	} else {
+		balise.innerHTML += '<img class="img_film" id="film_' + number + '_' + genre + '" src="' + film.image_url + '" onclick="modaleWindows(' + film.url.toString() + ')" style="display: none;">';
+	}
 }
 
 
@@ -89,3 +94,14 @@ function addImgFilm(balise, film) {
 		console.log(data);
 	})
 }*/
+
+function initVisibility (genre) {
+		for (var i = 0; i < 4; i++) {
+			var balise  = 'film_' + i + '_' + genre;
+			document.getElementById(balise).style.display = "block";
+		}
+	}
+
+function Visibility(balise) {
+
+}
