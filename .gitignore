@@ -129,4 +129,6 @@ dmypy.json
 .pyre/
 
 #User
-.script.js
+script.js
+scripts_V2.js
+scripts_V3.js
