@@ -89,6 +89,8 @@ h1 {
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+  display : flex;
+  flex-direction: row;
 }
 
 /* The Close Button */
@@ -106,3 +108,12 @@ h1 {
   cursor: pointer;
 }
 
+.list_info {
+	width: 50%
+	flex: auto;
+}
+
+#img_film_modale {
+	flex: auto;
+	margin: 1rem;
+}
