@@ -80,7 +80,7 @@ function addFlecheDroite(balise) {
 
 function addImgFilm(balise, film, number, genre) {
 	if (genre == 'best_film') {
-		balise.innerHTML += '<img class="img_film" id="' +genre + '" src="' + film.image_url + '" onclick="modalWindow(' + film.url + '")"  style="display: block;">';
+		balise.innerHTML += '<img class="img_film" id="' +genre + '" src="' + film.image_url + '" onclick="modalWindow(' + film.url + ')"  style="display: block;">';
 	} else {
 		balise.innerHTML += '<img class="img_film" id="film_' + number + '_' + genre + '" src="' + film.image_url + '" onclick="modalWindow(' + film.url + ')" style="display: none;">';
 	}
