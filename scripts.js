@@ -1,55 +1,7 @@
-var genre_films = ['best_films', 'Animation', 'Horror', 'Film-Noir', ];
 var number_films = 7;
+var number_films_on_carrousel = 2;
 var url_api = 'http://127.0.0.1:8000/api/v1/titles/?genre='
 
-
-function createAllCarrousel(){
-	for (var category of genre_films){
-		carrouselCategory(category);
-	}
-	bestFilm();
-}
-
-function carrouselCategory(genre){
-	var balise_category = document.getElementById(genre);
-	addFlecheGauche(balise_category);
-	searchBestFilm(genre);
-}
-
-function searchBestFilm(genre,page=1,film_add=0, list_films=[]){
-	var list_films = list_films;
-	var page = page;
-	var film_add = film_add;
-	var balise = document.getElementById(genre);
-	if (genre == 'best_films'){
-		var url = 'http://127.0.0.1:8000/api/v1/titles/?genre=';
-	} else {
-		var url = 'http://127.0.0.1:8000/api/v1/titles/?genre=' + genre;
-	}
-	fetch(url + '&sort_by=-imdb_score&page=' + page.toString())
-		.then(response => response.json())
-		.then(films_list => {
-			for (var i = 0; i < films_list.results.length; i++){
-				if (film_add < number_films) {
-					list_films.push(films_list.results[i.toString()]);
-					addImgFilm(balise, films_list.results[i.toString()], film_add, genre);
-					film_add += 1;
-				}
-			}
-			page += 1;
-			if (film_add < number_films){
-				searchBestFilm(genre, page, film_add, list_films);
-			}
-			if (film_add == number_films){
-				addFlecheDroite(balise);
-				initVisibility(genre);
-			}
-		})
-		.catch(error => {
-			console.log('Echec de la rêquete AJAX');
-		})
-	return list_films;
-}
 
 function bestFilm() {
 	var balise = document.getElementById("img_best_film");
@@ -61,7 +13,7 @@ function bestFilm() {
 			titleAndPlayBestFilm(best_film);
 		})
 		.catch(error => {
-			console.log('Echec de la rêquete AJAX');
+			console.log(error);
 		})
 }
 
@@ -70,32 +22,7 @@ function titleAndPlayBestFilm(film) {
 	balise.innerHTML = '<h1 id="title_best_film">' + film.title + '</h3>' + 
 					   ' <button id="play_best_film">Play</button>'
 }
-function addFlecheGauche(balise) {
-	balise.innerHTML += '<img class="fleche" src=img/fleche_gauche.png onclick="">';
-}
 
-function addFlecheDroite(balise) {
-	balise.innerHTML += '<img class="fleche" src=img/fleche_droite.png onclick="">';
-}
-
-function addImgFilm(balise, film, number, genre) {
-	if (genre == 'best_film') {
-		balise.innerHTML += '<img class="img_film" id="' + genre + '" src="' + film.image_url + '" onclick="modalWindow(\'' + film.url + '\')"  style="display: block;">';
-	} else {
-		balise.innerHTML += '<img class="img_film" id="film_' + number + '_' + genre + '" src="' + film.image_url + '" onclick="modalWindow(\'' + film.url + '\')" style="display: none;">';
-	}
-}
-
-function initVisibility (genre) {
-		for (var i = 0; i < 4; i++) {
-			var balise  = 'film_' + i + '_' + genre;
-			document.getElementById(balise).style.display = "block";
-		}
-	}
-
-function Visibility(balise) {
-
-}
 
 function modalWindow(url) {
 	var modal = document.getElementById("myModal");
@@ -109,7 +36,7 @@ function modalWindow(url) {
 							   '<li class="infos_modal_film" id="genres_modal_film"> Genre : '+ data.genres + '</li>' +
 							   '<li class="infos_modal_film" id="date_published_modal_film"> Date de sortie :' + data.date_published + '</li>' +
 							   '<li class="infos_modal_film" id="rated_modal_film"> Classement : ' + data.rated + '</li>' +
-							   '<li class="infos_modal_film" id="imdb_score_modal_film"> Score IMDB' + data.imdb_score + '</li>' +
+							   '<li class="infos_modal_film" id="imdb_score_modal_film"> Score Imdb : ' + data.imdb_score + '</li>' +
 							   '<li class="infos_modal_film" id="directors_modal_film"> Réalisateurs : ' + data.directors + '</li>' +
 							   '<li class="infos_modal_film" id="actors_modal_film"> Acteurs : '+ data.actors + '</li>' +
 							   '<li class="infos_modal_film" id="duration_modal_film"> Durée : ' + data.duration + ' minutes</li>' +
@@ -120,7 +47,7 @@ function modalWindow(url) {
 			balise_img.innerHTML = '<img id="img_film_modal" src="' + data.image_url + '">';
 		})
 		.catch(error => {
-			console.log('Echec de la rêquete AJAX');
+			console.log(error);
 		})
 	modal.style.display = "block";
 }
@@ -130,3 +57,110 @@ function closeModal() {
 	var modal = document.getElementById("myModal");
 	modal.style.display = "none";
 };
+
+
+class Carrousel {
+	constructor(genre, index) {
+		this.genre = genre;
+		this.list_films = [];
+		this.index = index;
+		this.balise = document.getElementById(this.genre);
+		this.compteur_first_film_on_screen = 0;
+		this.createNextPreviousBalise("left");
+		this.generateListFilms();
+
+
+	}
+
+	generateListFilms(page=1) {
+		// Generate list of n = number_films films for a category
+		var page = page;
+		if (this.genre != 'best_films') {
+			var url = url_api + this.genre;
+		} else {
+			var url = url_api;
+		}
+		fetch(url + '&sort_by=-imdb_score&page=' + page.toString())
+			.then(response => response.json())
+			.then(films_list => {
+				for (var i = 0; i < films_list.results.length; i++){
+					if (this.list_films.length < number_films) {
+						this.list_films.push(films_list.results[i.toString()]);
+					}
+				}
+				page += 1;
+				if (this.list_films.length < number_films){
+					this.generateListFilms(page);
+				} 
+				if (this.list_films.length == number_films){
+					this.addFilmOnCarrousel();
+					this.createNextPreviousBalise("right");
+					this.cacheAllFilms();
+					this.filmOnScreen();
+				}
+
+			})
+			.catch(error => {
+				console.log(error);
+			})
+	}
+
+	createNextPreviousBalise(direction) {
+		if (direction == "left") {
+			this.balise.innerHTML += '<img class="fleche" id="fleche_left_' + this.genre + '" src=img/fleche_gauche.png onclick="mesCarrousels[' + this.index + '].deplacementCarrousel(\'left\')">';
+		}
+		if (direction == "right") {
+			this.balise.innerHTML += '<img class="fleche" id="fleche_left_' + this.genre + '" src=img/fleche_droite.png onclick="mesCarrousels[' + this.index + '].deplacementCarrousel(\'right\')">';
+		}
+	}
+
+	addFilmOnCarrousel() {
+		// add a balise <img> for the film of the category
+		for (var i = 0; i < this.list_films.length; i++) {
+			this.balise.innerHTML += '<img class="img_film img_film_' + this.genre + '" id="film_' + i + '_' + this.genre + '" src="' + this.list_films[i.toString()].image_url + '" onclick="modalWindow(\'' + this.list_films[i.toString()].url + '\')" >';
+		}
+	}
+
+	cacheAllFilms() {
+		for ( var i = 0; i < number_films; i++) {
+			document.getElementById("film_" + i.toString() + '_' + this.genre).style.display = "none";
+		}
+	}
+
+	filmOnScreen() {
+		for (var i = this.compteur_first_film_on_screen; i < (this.compteur_first_film_on_screen + (number_films_on_carrousel)); i++){
+			document.getElementById("film_" + i.toString() + '_' + this.genre).style.display = "block";
+		}
+	}
+
+	deplacementCarrousel (direction) {
+		if (direction == "right") {
+			if (this.compteur_first_film_on_screen < number_films - number_films_on_carrousel) {
+				this.compteur_first_film_on_screen += 1;
+				this.cacheAllFilms();
+				this.filmOnScreen();
+			} else {
+			 console.log("Trop loin à droite !");
+			}
+		}
+
+		if (direction == "left") {
+			if (this.compteur_first_film_on_screen > 0) {
+				this.compteur_first_film_on_screen -= 1;
+				this.cacheAllFilms();
+				this.filmOnScreen(); 
+			} else {
+				console.log("Trop loin vers la gauche !");
+			}
+		}
+	}
+
+}
+
+var mesCarrousels = new Array();
+var genre_films = ['best_films', 'Animation', 'Horror', 'Film-Noir'];
+
+for (var i in genre_films) {
+	genre_films[i] = new Carrousel(genre_films[i], i);
+	mesCarrousels.push(genre_films[i]);
+}

@@ -41,12 +41,9 @@ h1 {
 	height: 80%;
 }
 .img_film{
-	margin: 1rem;
-	height: 80%;
-	display: none;
 }
 .img_film:hover {
-	vertical-align: bottom;
+
 }
 
 .category{

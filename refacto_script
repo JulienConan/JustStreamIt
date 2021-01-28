@@ -1,0 +1,31 @@
+var genre_films = ['best_films', 'Animation', 'Horror', 'Film-Noir', ];
+var number_films = 7;
+var url_api = 'http://127.0.0.1:8000/api/v1/titles/?genre='
+
+
+class Carrousel {
+	constructor(genre) {
+		this.genre = genre;
+		this.list_films = [];
+	}
+
+	generateListFilms(page=1) {
+		var page = page;
+		fetch(url + '&sort_by=-imdb_score&page=' + page.toString())
+			.then(response => response.json())
+			.then(films_list => {
+				for (var i = 0; i < films_list.results.length; i++){
+					if (this.list_films.length < number_films) {
+						this.list_films.push(films_list.results[i.toString()]);
+					}
+				}
+				page += 1;
+				if (this.list_films.length < number_films){
+					searchBestFilm(page);
+				}
+			})
+			.catch(error => {
+				console.log('Echec de la rêquete AJAX');
+			})
+}
+	
