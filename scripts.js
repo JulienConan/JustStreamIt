@@ -1,5 +1,5 @@
 var number_films = 7;
-var number_films_on_carrousel = 2;
+var number_films_on_carrousel = 4;
 var url_api = 'http://127.0.0.1:8000/api/v1/titles/?genre='
 
 
@@ -9,20 +9,15 @@ function bestFilm() {
 		.then(response => response.json())
 		.then(films_list => {
 			var best_film = films_list.results["0"];
-			addImgFilm(balise, best_film, 0, 'best_film');
-			titleAndPlayBestFilm(best_film);
+			balise.innerHTML += '<img class="img_film img_best_film" src="' + best_film.image_url + '" onclick="modalWindow(\'' + best_film.url + '\')" >';
+			var balise_title = document.getElementById('tile_and_play_best_film');
+			balise_title.innerHTML = '<h1 id="title_best_film">' + best_film.title + '</h3>' + 
+					   ' <button id="play_best_film">Play</button>';
 		})
 		.catch(error => {
 			console.log(error);
 		})
 }
-
-function titleAndPlayBestFilm(film) {
-	var balise = document.getElementById('tile_and_play_best_film');
-	balise.innerHTML = '<h1 id="title_best_film">' + film.title + '</h3>' + 
-					   ' <button id="play_best_film">Play</button>'
-}
-
 
 function modalWindow(url) {
 	var modal = document.getElementById("myModal");
@@ -159,6 +154,8 @@ class Carrousel {
 
 var mesCarrousels = new Array();
 var genre_films = ['best_films', 'Animation', 'Horror', 'Film-Noir'];
+
+bestFilm();
 
 for (var i in genre_films) {
 	genre_films[i] = new Carrousel(genre_films[i], i);
