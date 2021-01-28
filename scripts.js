@@ -80,20 +80,11 @@ function addFlecheDroite(balise) {
 
 function addImgFilm(balise, film, number, genre) {
 	if (genre == 'best_film') {
-		balise.innerHTML += '<img class="img_film" id="' +genre + '" src="' + film.image_url + '" onclick="modaleWindows(' + film.url.toString() + ')"  style="display: block;">';
+		balise.innerHTML += '<img class="img_film" id="' +genre + '" src="' + film.image_url + '" onclick="modalWindow(' + film.url + '")"  style="display: block;">';
 	} else {
-		balise.innerHTML += '<img class="img_film" id="film_' + number + '_' + genre + '" src="' + film.image_url + '" onclick="modaleWindows(' + film.url.toString() + ')" style="display: none;">';
+		balise.innerHTML += '<img class="img_film" id="film_' + number + '_' + genre + '" src="' + film.image_url + '" onclick="modalWindow(' + film.url + ')" style="display: none;">';
 	}
 }
-
-
-/*function modaleWindow(url) {
-	fetch(url)
-	.then(response => response.json())
-	.then(data =>{
-		console.log(data);
-	})
-}*/
 
 function initVisibility (genre) {
 		for (var i = 0; i < 4; i++) {
@@ -105,3 +96,15 @@ function initVisibility (genre) {
 function Visibility(balise) {
 
 }
+
+function modalWindow(url) {
+	var modal = document.getElementById("myModal");
+	console.log(url);
+	modal.style.display = "block";
+}
+
+//Close Modal Window
+function closeModal() {
+	var modal = document.getElementById("myModal");
+	modal.style.display = "none";
+};
