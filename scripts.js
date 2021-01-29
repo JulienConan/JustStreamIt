@@ -4,15 +4,23 @@ var url_api = 'http://127.0.0.1:8000/api/v1/titles/?genre='
 
 
 function bestFilm() {
-	var balise = document.getElementById("img_best_film");
+	var balise_best_film_img = document.getElementById("img_best_film");
 	fetch('http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score')
 		.then(response => response.json())
 		.then(films_list => {
 			var best_film = films_list.results["0"];
-			balise.innerHTML += '<img class="img_film img_best_film" src="' + best_film.image_url + '" onclick="modalWindow(\'' + best_film.url + '\')" >';
-			var balise_title = document.getElementById('tile_and_play_best_film');
-			balise_title.innerHTML = '<h1 id="title_best_film">' + best_film.title + '</h3>' + 
-					   ' <button id="play_best_film">Play</button>';
+			balise_best_film_img.innerHTML += '<img class="img_best_film" src="' + best_film.image_url + '" onclick="modalWindow(\'' + best_film.url + '\')" >';
+			fetch(best_film.url)
+				.then(response => response.json())
+				.then( film_infos => {
+					var balise_best_film = document.getElementById('tile_and_play_best_film');
+					balise_best_film.innerHTML = '<h1 id="title_best_film">' + film_infos.title + '</h2>' +
+												 '<p id="description_best_film">' + film_infos.description + '</p>' +
+					   				 			 '<button id="play_best_film">Play</button>';
+					})
+				.catch(error => {
+					console.log(error);
+				})
 		})
 		.catch(error => {
 			console.log(error);
@@ -27,16 +35,16 @@ function modalWindow(url) {
 		.then(response => response.json())
 		.then(data => {
 
-			balise_data.innerHTML = '<li class="infos_modal_film" id="title_modal_film"> Titre :' + data.title + '</li>' + 
+			balise_data.innerHTML = '<li class="infos_modal_film" id="title_modal_film"> Titre : ' + data.title + '</li>' + 
 							   '<li class="infos_modal_film" id="genres_modal_film"> Genre : '+ data.genres + '</li>' +
-							   '<li class="infos_modal_film" id="date_published_modal_film"> Date de sortie :' + data.date_published + '</li>' +
+							   '<li class="infos_modal_film" id="date_published_modal_film"> Date de sortie : ' + data.date_published + '</li>' +
 							   '<li class="infos_modal_film" id="rated_modal_film"> Classement : ' + data.rated + '</li>' +
 							   '<li class="infos_modal_film" id="imdb_score_modal_film"> Score Imdb : ' + data.imdb_score + '</li>' +
 							   '<li class="infos_modal_film" id="directors_modal_film"> Réalisateurs : ' + data.directors + '</li>' +
 							   '<li class="infos_modal_film" id="actors_modal_film"> Acteurs : '+ data.actors + '</li>' +
 							   '<li class="infos_modal_film" id="duration_modal_film"> Durée : ' + data.duration + ' minutes</li>' +
 							   '<li class="infos_modal_film" id="countries_modal_film"> Pays d\'origine : ' + data.countries + '</li>' +
-							   '<li class="infos_modal_film" id="box_office_modal_film"> Résultat au box office : ' + data.genres + '</li>' +
+							   '<li class="infos_modal_film" id="box_office_modal_film"> Résultat au box office : ' + data.worldwide_gross_income + '</li>' +
 							   '<li class="infos_modal_film" id="long_description_modal_film"> Résumé : ' + data.long_description + '</li>'
 
 			balise_img.innerHTML = '<img id="img_film_modal" src="' + data.image_url + '">';
