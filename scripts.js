@@ -30,11 +30,11 @@ function bestFilm() {
 function modalWindow(url) {
 	var modal = document.getElementById("myModal");
 	var balise = document.getElementById('content');
+	balise.innerHTML = '<ul id="modal-content-infos"></ul>';
 	var balise_infos = document.getElementById("modal-content-infos");
 	fetch(url)
 		.then(response => response.json())
 		.then(data => {
-
 			balise_infos.innerHTML = '<li class="infos_modal_film" id="title_modal_film"> Titre : ' + data.title + '</li>' + 
 							   '<li class="infos_modal_film" id="genres_modal_film"> Genre : '+ data.genres + '</li>' +
 							   '<li class="infos_modal_film" id="date_published_modal_film"> Date de sortie : ' + data.date_published + '</li>' +
