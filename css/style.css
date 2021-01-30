@@ -103,7 +103,7 @@ h2 {
 /* Modal Content/Box */
 .modal-content {
   font-family: cursive;
-  font-size: 1.5rem;
+  font-size: 1rem;
   background-color: rgb(111,111,111);
   margin: 12% auto; 
   padding: 0.1rem;
@@ -111,13 +111,12 @@ h2 {
   width: 80%;
   height: 50%;
   border-radius: 0.2rem;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 
 /* The Close Button */
 .close {
- 	float: right;
 	color: #aaa;
 	position: relative;
 	font-weight: bold;
@@ -131,18 +130,6 @@ h2 {
 }
 
 .list_info {
-	flex:; auto;
 	width: 60%;
 	overflow: auto;
-}
-
-#img_film_modale {
-	flex: auto;
-	width: 10%;
-	height: 100%;
-	align-items: center;
-
-}
-#img_film_modal {
-	vertical-align: middle;
 }

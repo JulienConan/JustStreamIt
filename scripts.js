@@ -29,13 +29,13 @@ function bestFilm() {
 
 function modalWindow(url) {
 	var modal = document.getElementById("myModal");
-	var balise_data = document.getElementById("list_info_film");
-	var balise_img = document.getElementById("img_film_modale");
+	var balise = document.getElementById('content');
+	var balise_infos = document.getElementById("modal-content-infos");
 	fetch(url)
 		.then(response => response.json())
 		.then(data => {
 
-			balise_data.innerHTML = '<li class="infos_modal_film" id="title_modal_film"> Titre : ' + data.title + '</li>' + 
+			balise_infos.innerHTML = '<li class="infos_modal_film" id="title_modal_film"> Titre : ' + data.title + '</li>' + 
 							   '<li class="infos_modal_film" id="genres_modal_film"> Genre : '+ data.genres + '</li>' +
 							   '<li class="infos_modal_film" id="date_published_modal_film"> Date de sortie : ' + data.date_published + '</li>' +
 							   '<li class="infos_modal_film" id="rated_modal_film"> Classement : ' + data.rated + '</li>' +
@@ -45,9 +45,11 @@ function modalWindow(url) {
 							   '<li class="infos_modal_film" id="duration_modal_film"> Durée : ' + data.duration + ' minutes</li>' +
 							   '<li class="infos_modal_film" id="countries_modal_film"> Pays d\'origine : ' + data.countries + '</li>' +
 							   '<li class="infos_modal_film" id="box_office_modal_film"> Résultat au box office : ' + data.worldwide_gross_income + '</li>' +
-							   '<li class="infos_modal_film" id="long_description_modal_film"> Résumé : ' + data.long_description + '</li>'
+							   '<li class="infos_modal_film" id="long_description_modal_film"> Résumé : ' + data.long_description + '</li>';
 
-			balise_img.innerHTML = '<img id="img_film_modal" src="' + data.image_url + '">';
+			balise.innerHTML += '<img id="img_film_modal" src="' + data.image_url + '">';
+
+			balise.innerHTML += '<span class="close" id="close" onclick="closeModal()">&times;</span>';
 		})
 		.catch(error => {
 			console.log(error);
