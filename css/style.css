@@ -3,18 +3,19 @@ html {
 }
 
 body{
-	font-size 100%;
+	font-size:; 100%;
 	margin: 0px;
 	background-color: black;
 }
+
 nav{
 	background-color: rgb(185,34,34);
 	height: 5rem;
 }
+
 form{
 	background-color: blue;
 }
-
 
 h1 {
 	color: white;
@@ -27,61 +28,65 @@ h2 {
 	font-family: cursive;
 	letter-spacing: 0.1em;
 }
-
-.all_carrousels {
-	width: 70%;
-	margin: 0 auto;
-	display: flex; 
-	flex-direction: column;
-}
-
-.carousel{
-	margin: 0 auto;
-	height: 10rem;
-	display: flex;
+ul
+{
+  list-style-type: none;
 }
 
 #Logo{
 	height  : 100%;
 }
 
+.all_carrousels {
+	width: 80%;
+	margin: 0 auto;
+	display: flex; 
+	flex-direction: column;
+}
+
+.category{
+	margin: 2rem auto;
+	width: 80%;
+	
+}
+
+.carousel{
+	margin: 0 auto;
+	height: 12rem;
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto;
+
+}
 
 .fleche{
 	background-color: rgba(255,255,255,0.2);
-	margin: 0.5rem;
 	border-radius: 0.3rem;
+	height: 100%
 }
 
 .img_film{
-	margin: 0.5rem;
-
+	height: 100%;
 }
 
-
-.category{
-	display: flex;
-	flex-direction: column;
-	margin: 0 auto;
-	width: 100%;
+#title_best_film {
+	margin: 2rem;
 }
-
-#main_best_film {
-
-	display: flex;
+#info_best_film {
+	display: grid;
+	grid-template-columns: auto auto;
 	background-color: rgba(111,111,111,0.3);
-	margin: 2rem  auto;
-	border: width style color;
-	border-width: 5px;
-	border-style: groove;
+	margin: 0 auto;
 	position: relative;
-	width: 50%;
-
+	width: 60%;
+	color: white;
+}
+.img_best_film {
+	height: 100%;
+	float: right;
 }
 
 #play_best_film {
-	position: relative;
-	left: 50%;
-	bottom: 1%;
+margin: 0 auto;
 }
 
 #description_best_film {
@@ -112,25 +117,30 @@ h2 {
   height: 50%;
   border-radius: 0.2rem;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 0.75fr auto 20px;
 }
 
 /* The Close Button */
 .close {
+	top: 0;
 	color: #aaa;
-	position: relative;
 	font-weight: bold;
 	font-size: 2rem;
 }
 
-.close:hover,
-.close:focus {
+.close:hover,.close:focus {
  	color: black;
 	text-decoration: none;
 	cursor: pointer;
 }
 
-.list_info {
-	width: 60%;
-	overflow: auto;
+#modal-content-infos {
+	overflow : auto;
+	height: 100%;
 }
+
+#img_film_modal {
+height: 100%;
+}
+
+

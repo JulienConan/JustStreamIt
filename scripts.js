@@ -35,20 +35,19 @@ function modalWindow(url) {
 	fetch(url)
 		.then(response => response.json())
 		.then(data => {
-			balise_infos.innerHTML = '<li class="infos_modal_film" id="title_modal_film"> Titre : ' + data.title + '</li>' + 
-							   '<li class="infos_modal_film" id="genres_modal_film"> Genre : '+ data.genres + '</li>' +
-							   '<li class="infos_modal_film" id="date_published_modal_film"> Date de sortie : ' + data.date_published + '</li>' +
-							   '<li class="infos_modal_film" id="rated_modal_film"> Classement : ' + data.rated + '</li>' +
-							   '<li class="infos_modal_film" id="imdb_score_modal_film"> Score Imdb : ' + data.imdb_score + '</li>' +
-							   '<li class="infos_modal_film" id="directors_modal_film"> Réalisateurs : ' + data.directors + '</li>' +
-							   '<li class="infos_modal_film" id="actors_modal_film"> Acteurs : '+ data.actors + '</li>' +
-							   '<li class="infos_modal_film" id="duration_modal_film"> Durée : ' + data.duration + ' minutes</li>' +
-							   '<li class="infos_modal_film" id="countries_modal_film"> Pays d\'origine : ' + data.countries + '</li>' +
-							   '<li class="infos_modal_film" id="box_office_modal_film"> Résultat au box office : ' + data.worldwide_gross_income + '</li>' +
-							   '<li class="infos_modal_film" id="long_description_modal_film"> Résumé : ' + data.long_description + '</li>';
+			balise_infos.innerHTML = '<li class="infos_modal_film" id="title_modal_film"> <strong>Titre :  </strong> ' + data.title + '</li>' + 
+							   '<li class="infos_modal_film" id="genres_modal_film"> <strong>Genre :  </strong> '+ data.genres + '</li>' +
+							   '<li class="infos_modal_film" id="date_published_modal_film"> <strong>Date de sortie :  </strong> ' + data.date_published + '</li>' +
+							   '<li class="infos_modal_film" id="rated_modal_film"> <strong>Classement :  </strong> ' + data.rated + '</li>' +
+							   '<li class="infos_modal_film" id="imdb_score_modal_film"> <strong>Score Imdb :  </strong> ' + data.imdb_score + '</li>' +
+							   '<li class="infos_modal_film" id="directors_modal_film"> <strong>Réalisateurs :  </strong> ' + data.directors + '</li>' +
+							   '<li class="infos_modal_film" id="actors_modal_film"> <strong>Acteurs :  </strong> '+ data.actors + '</li>' +
+							   '<li class="infos_modal_film" id="duration_modal_film"> <strong>Durée :  </strong> ' + data.duration + ' minutes</li>' +
+							   '<li class="infos_modal_film" id="countries_modal_film"> <strong>Pays d\'origine :  </strong> ' + data.countries + '</li>' +
+							   '<li class="infos_modal_film" id="box_office_modal_film"> <strong>Résultat au box office :  </strong> ' + data.worldwide_gross_income + '</li>' +
+							   '<li class="infos_modal_film" id="long_description_modal_film"> <strong>Résumé :  </strong> ' + data.long_description + '</li>';
 
 			balise.innerHTML += '<img id="img_film_modal" src="' + data.image_url + '">';
-
 			balise.innerHTML += '<span class="close" id="close" onclick="closeModal()">&times;</span>';
 		})
 		.catch(error => {
@@ -163,7 +162,7 @@ class Carrousel {
 }
 
 var mesCarrousels = new Array();
-var genre_films = ['best_films', 'Animation', 'Horror', 'Film-Noir'];
+var genre_films = ['best_films', 'Animation', 'Horror', 'Film-Noir',];
 
 bestFilm();
 
