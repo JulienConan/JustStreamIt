@@ -9,7 +9,7 @@ function bestFilm() {
 		.then(response => response.json())
 		.then(films_list => {
 			var best_film = films_list.results["0"];
-			balise_best_film_img.innerHTML += '<img class="img_best_film" src="' + best_film.image_url + '" onclick="modalWindow(\'' + best_film.url + '\')" >';
+			balise_best_film_img.innerHTML += '<img class="img_best_film" src="' + best_film.image_url + '" alt="Image du meilleur film" onclick="modalWindow(\'' + best_film.url + '\')" >';
 			fetch(best_film.url)
 				.then(response => response.json())
 				.then( film_infos => {
@@ -30,12 +30,12 @@ function bestFilm() {
 function modalWindow(url) {
 	var modal = document.getElementById("myModal");
 	var balise = document.getElementById('content');
-	balise.innerHTML = '<ul id="modal-content-infos"></ul>';
-	var balise_infos = document.getElementById("modal-content-infos");
 	fetch(url)
 		.then(response => response.json())
 		.then(data => {
-			balise_infos.innerHTML = '<li class="infos_modal_film" id="title_modal_film"> <strong>Titre :  </strong> ' + data.title + '</li>' + 
+			balise.innerHTML += '<div id="close-button"><button class="close" id="close" onclick="closeModal()">&times;</button></div>';
+			balise.innerHTML += '<div id="film-modal-info">' + 
+							   '<li class="infos_modal_film" id="title_modal_film"> <strong>Titre :  </strong> ' + data.title + '</li>' + 
 							   '<li class="infos_modal_film" id="genres_modal_film"> <strong>Genre :  </strong> '+ data.genres + '</li>' +
 							   '<li class="infos_modal_film" id="date_published_modal_film"> <strong>Date de sortie :  </strong> ' + data.date_published + '</li>' +
 							   '<li class="infos_modal_film" id="rated_modal_film"> <strong>Classement :  </strong> ' + data.rated + '</li>' +
@@ -45,10 +45,10 @@ function modalWindow(url) {
 							   '<li class="infos_modal_film" id="duration_modal_film"> <strong>Durée :  </strong> ' + data.duration + ' minutes</li>' +
 							   '<li class="infos_modal_film" id="countries_modal_film"> <strong>Pays d\'origine :  </strong> ' + data.countries + '</li>' +
 							   '<li class="infos_modal_film" id="box_office_modal_film"> <strong>Résultat au box office :  </strong> ' + data.worldwide_gross_income + '</li>' +
-							   '<li class="infos_modal_film" id="long_description_modal_film"> <strong>Résumé :  </strong> ' + data.long_description + '</li>';
+							   '<li class="infos_modal_film" id="long_description_modal_film"> <strong>Résumé :  </strong> ' + data.long_description + '</li>' +
+							   '</div>'
 
-			balise.innerHTML += '<div><img id="img_film_modal" src="' + data.image_url + '">';
-			balise.innerHTML += '<button class="close" id="close" onclick="closeModal()">&times;</button>';
+			balise.innerHTML += '<div id="img-modal" ><img id="img_film_modal" src="' + data.image_url + '"></div>';
 
 		})
 		.catch(error => {
@@ -122,7 +122,7 @@ class Carrousel {
 	addFilmOnCarrousel() {
 		// add a balise <img> for the film of the category
 		for (var i = 0; i < this.list_films.length; i++) {
-			this.balise.innerHTML += '<img class="img_film caroussel-content img_film_' + this.genre + '" id="film_' + i + '_' + this.genre + '" src="' + this.list_films[i.toString()].image_url + '" onclick="modalWindow(\'' + this.list_films[i.toString()].url + '\')" >';
+			this.balise.innerHTML += '<img class="img_film caroussel-content img_film_' + this.genre + '" id="film_' + i + '_' + this.genre + '" src="' + this.list_films[i.toString()].image_url + '" alt="image de film" onclick="modalWindow(\'' + this.list_films[i.toString()].url + '\')" >';
 		}
 	}
 
