@@ -1,20 +1,14 @@
 html {
 	font-size: 100%;
+	font-family: cursive;
 }
 
 body{
-	font-size:; 100%;
+	font-size: 100%;
 	margin: 0px;
 	background-color: black;
-}
-
-nav{
-	background-color: rgb(185,34,34);
-	height: 5rem;
-}
-
-form{
-	background-color: blue;
+	display: flex;
+	flex-direction: column;
 }
 
 h1 {
@@ -25,16 +19,54 @@ h2 {
 	text-align: center;
 	flex: auto;
 	color: rgb(171,171,171);
-	font-family: cursive;
 	letter-spacing: 0.1em;
 }
-ul
-{
-  list-style-type: none;
+
+
+#top-nav{
+	background-color: rgb(185,34,34);
+	height: 5rem;
+	display: flex;
+	position: fixed;
+	width: 100%;
+
 }
 
 #Logo{
 	height  : 100%;
+
+}
+
+#navigation {
+	width: 88%;
+}
+
+#menu {
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1.7rem;
+}
+
+
+#navigation li {
+	display: table-cell;
+	width: 10rem;
+	border: solid;
+	border-radius: 0.5rem;
+	text-align: center;
+	background: rgba(0, 0, 0, 0.2);
+}
+
+#navigation a {
+	color: black;
+	text-decoration: none;
+}
+
+.all-content {
+	width: 100%
+	margin: 20% auto;
+
 }
 
 .all_carrousels {
@@ -47,50 +79,65 @@ ul
 .category{
 	margin: 2rem auto;
 	width: 80%;
-	
 }
 
-.carousel{
+.caroussel{
 	margin: 0 auto;
 	height: 12rem;
-	display: grid;
-	grid-template-columns: auto auto auto auto auto auto;
-
+	display: flex;
 }
+
+.caroussel-content {
+	height: 12rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	cursor: pointer;
+}
+
 
 .fleche{
 	background-color: rgba(255,255,255,0.2);
 	border-radius: 0.3rem;
-	height: 100%
 }
 
-.img_film{
-	height: 100%;
+#best_film {
+	margin-top: 5%;
+	text-align: center;
 }
 
 #title_best_film {
 	margin: 2rem;
+	margin-bottom: 4rem;
 }
-#info_best_film {
+
+#info-best-film {
+	width: 100%;
+}
+
+#best-film-content {
 	display: grid;
-	grid-template-columns: auto auto;
+	grid-template-columns: 80% auto;
 	background-color: rgba(111,111,111,0.3);
 	margin: 0 auto;
-	position: relative;
+	height: 20rem;
 	width: 60%;
 	color: white;
 }
+
 .img_best_film {
 	height: 100%;
 	float: right;
+
 }
 
 #play_best_film {
-margin: 0 auto;
+	margin-top: 4rem;
+	border-radius: 0.2rem;
+	cursor: pointer;
 }
 
 #description_best_film {
-	flex : auto;
+
 }
 
 .modal {
@@ -116,16 +163,19 @@ margin: 0 auto;
   width: 80%;
   height: 50%;
   border-radius: 0.2rem;
-  display: grid;
-  grid-template-columns: 0.75fr auto 20px;
+  display: flex;
+  
 }
 
 /* The Close Button */
 .close {
+	position: relative;
 	top: 0;
+	right: 0;
 	color: #aaa;
 	font-weight: bold;
-	font-size: 2rem;
+	height: 2rem;
+	width: 2rem;
 }
 
 .close:hover,.close:focus {
@@ -137,10 +187,15 @@ margin: 0 auto;
 #modal-content-infos {
 	overflow : auto;
 	height: 100%;
+	width: 70%;
+
 }
 
 #img_film_modal {
 height: 100%;
 }
 
+#modal_content-infos {
+	width: 30rem%;
+}
 

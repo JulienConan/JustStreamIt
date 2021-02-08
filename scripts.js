@@ -13,7 +13,7 @@ function bestFilm() {
 			fetch(best_film.url)
 				.then(response => response.json())
 				.then( film_infos => {
-					var balise_best_film = document.getElementById('tile_and_play_best_film');
+					var balise_best_film = document.getElementById('info-best-film');
 					balise_best_film.innerHTML = '<h1 id="title_best_film">' + film_infos.title + '</h2>' +
 												 '<p id="description_best_film">' + film_infos.description + '</p>' +
 					   				 			 '<button id="play_best_film">Play</button>';
@@ -47,8 +47,9 @@ function modalWindow(url) {
 							   '<li class="infos_modal_film" id="box_office_modal_film"> <strong>Résultat au box office :  </strong> ' + data.worldwide_gross_income + '</li>' +
 							   '<li class="infos_modal_film" id="long_description_modal_film"> <strong>Résumé :  </strong> ' + data.long_description + '</li>';
 
-			balise.innerHTML += '<img id="img_film_modal" src="' + data.image_url + '">';
-			balise.innerHTML += '<span class="close" id="close" onclick="closeModal()">&times;</span>';
+			balise.innerHTML += '<div><img id="img_film_modal" src="' + data.image_url + '">';
+			balise.innerHTML += '<button class="close" id="close" onclick="closeModal()">&times;</button>';
+
 		})
 		.catch(error => {
 			console.log(error);
@@ -111,17 +112,17 @@ class Carrousel {
 
 	createNextPreviousBalise(direction) {
 		if (direction == "left") {
-			this.balise.innerHTML += '<img class="fleche" id="fleche_left_' + this.genre + '" src=img/fleche_gauche.png onclick="mesCarrousels[' + this.index + '].deplacementCarrousel(\'left\')">';
+			this.balise.innerHTML += '<img class="fleche caroussel-content" id="fleche_left_' + this.genre + '" src=img/fleche_gauche.png onclick="mesCarrousels[' + this.index + '].deplacementCarrousel(\'left\')">';
 		}
 		if (direction == "right") {
-			this.balise.innerHTML += '<img class="fleche" id="fleche_left_' + this.genre + '" src=img/fleche_droite.png onclick="mesCarrousels[' + this.index + '].deplacementCarrousel(\'right\')">';
+			this.balise.innerHTML += '<img class="fleche caroussel-content" id="fleche_left_' + this.genre + '" src=img/fleche_droite.png onclick="mesCarrousels[' + this.index + '].deplacementCarrousel(\'right\')">';
 		}
 	}
 
 	addFilmOnCarrousel() {
 		// add a balise <img> for the film of the category
 		for (var i = 0; i < this.list_films.length; i++) {
-			this.balise.innerHTML += '<img class="img_film img_film_' + this.genre + '" id="film_' + i + '_' + this.genre + '" src="' + this.list_films[i.toString()].image_url + '" onclick="modalWindow(\'' + this.list_films[i.toString()].url + '\')" >';
+			this.balise.innerHTML += '<img class="img_film caroussel-content img_film_' + this.genre + '" id="film_' + i + '_' + this.genre + '" src="' + this.list_films[i.toString()].image_url + '" onclick="modalWindow(\'' + this.list_films[i.toString()].url + '\')" >';
 		}
 	}
 

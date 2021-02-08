@@ -9,53 +9,57 @@
 
 
 </head>
-<body onload="">
-	<nav>
-		<img id="Logo" src="img/JustStreamIt.png">
+<body>
+	<header id="top-nav">
+		<img id="Logo" src="img/JustStreamIt.png" alt="Logo JustStreamIt">
+		<nav id="navigation" class="navigation">
+			 <ul id="menu">
+  				<li><a href="index.html">Accueil</a></li>
+  				<li><a href="#best_films_cat">Catégories</a></li>
+			</ul> 	
+		</nav>
+	</header>
 
-	</nav>
-
-	<div id="best_film" >
-		<h2 class="title_cat">Meilleur Film</h2>
-		<div id="info_best_film" >
-			<div id="tile_and_play_best_film">
+	<div id="all-content">		
+		<div id="best_film" >
+			<h2 class="title_cat">Meilleur Film</h2>
+			<div id="best-film-content" >
+				<div id="info-best-film">
+				</div>
+				<div id="img_best_film">	
+				</div>
 			</div>
-			<div id="img_best_film">	
+		</div>
+		<div class="all_carrousels">
+			<div class="category" id="best_films_cat">
+				<h2 class="title_cat">Films les mieux notés</h2>
+				<div class="caroussel" id="best_films">		
+				</div>
+			</div>
+			<div class="category" id="Animation_cat">
+				<h2 class="title_cat">Animation</h2>
+				<div class="caroussel" id="Animation">	
+				</div>
+			</div>
+			<div class="category" id="Horror_cat">
+				<h2 class="title_cat">Horror</h2>
+				<div class="caroussel" id="Horror">		
+				</div>
+			</div>
+			<div class="category" id="Film_Noir_cat">
+				<h2 class="title_cat">Film-noir</h2>
+				<div class="caroussel" id="Film-Noir">	
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="all_carrousels">
-		<div class="category" id="best_films_cat">
-			<h2 class="title_cat">Films les mieux notés</h2>
-			<div class="carousel" id="best_films">		
-			</div>
-		</div>
-		<div class="category" id="Animation_cat">
-			<h2 class="title_cat">Animation</h2>
-			<div class="carousel carrousel_horror" id="Animation">	
-			</div>
-		</div>
-		<div class="category" id="Horror_cat">
-			<h2 class="title_cat">Horror</h2>
-			<div class="carousel" id="Horror">		
-			</div>
-		</div>
-		<div class="category" id="Film_Noir_cat">
-			<h2 class="title_cat">Film-noir</h2>
-			<div class="carousel" id="Film-Noir">	
-			</div>
-		</div>
 	
-	</div>
-	
-	<!-- Modal Windows -->
 	<div id="myModal" class="modal">
- 		<!-- Modal content -->
   		<div class="modal-content" id="content">	
   		</div>
 	</div>
 
-	<script src="scripts.js" type="application/javascript"></script>
+	<script src="scripts.js"></script>
 	<div onload="init()"></div>
 </body>
 </html>
