@@ -33,8 +33,8 @@ function modalWindow(url) {
 	fetch(url)
 		.then(response => response.json())
 		.then(data => {
-			balise.innerHTML += '<div id="close-button"><button class="close" id="close" onclick="closeModal()">&times;</button></div>';
-			balise.innerHTML += '<div id="film-modal-info">' + 
+			balise.innerHTML = '<div id="close-button"><button class="close" id="close" onclick="closeModal()">&times;</button></div>';
+			balise.innerHTML += '<div id="modal-info">' + 
 							   '<li class="infos_modal_film" id="title_modal_film"> <strong>Titre :  </strong> ' + data.title + '</li>' + 
 							   '<li class="infos_modal_film" id="genres_modal_film"> <strong>Genre :  </strong> '+ data.genres + '</li>' +
 							   '<li class="infos_modal_film" id="date_published_modal_film"> <strong>Date de sortie :  </strong> ' + data.date_published + '</li>' +
@@ -48,7 +48,7 @@ function modalWindow(url) {
 							   '<li class="infos_modal_film" id="long_description_modal_film"> <strong>Résumé :  </strong> ' + data.long_description + '</li>' +
 							   '</div>'
 
-			balise.innerHTML += '<div id="img-modal" ><img id="img_film_modal" src="' + data.image_url + '"></div>';
+			balise.innerHTML += '<div id="modal-img" ><img id="img_film_modal" src="' + data.image_url + '"></div>';
 
 		})
 		.catch(error => {
